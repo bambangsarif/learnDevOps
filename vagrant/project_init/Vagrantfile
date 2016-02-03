@@ -12,7 +12,11 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "base"
+  config.vm.box = "ubuntu/trusty64"
+
+  # the following is a bootstrap script that can be used to install software
+  # packages. We can use chef or ansimble to automate it!
+  config.vm.provisioning :shell, path: "bootstrap.sh"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
