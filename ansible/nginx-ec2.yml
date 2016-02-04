@@ -1,5 +1,7 @@
 ---
 - hosts: webservers
+  sudo: yes 
+  remote_user: ubuntu 
   vars:
     user: www-data
     worker_processes: 2
@@ -7,13 +9,13 @@
     worker_connections: 768
   tasks:
   - name: install nginx
-    apt: name=nginx state=latest
+    apt: name=nginx state=latest update_cache=yes
   - name: ensure nginx is running (and enable it at boot)
     service: name=nginx state=started enabled=yes
   - name: write the nginx config file
-    template: src=config/nginx.conf.j2 dest=/etc/nginx/nginx.conf
+    template: src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
     notify:
     - restart nginx
   handlers:
-  - name: restart nginx
-    service: name=nginx state=restarted
+    - name: restart nginx
+      service: name=nginx state=restarted
