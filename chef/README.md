@@ -20,4 +20,4 @@ This is the folder for chef training
    
 8. try to run it locally!
    run chef client 'sudo chef-client -z --runlist "recipe[my_cookbook]"'
-
+   try the new nginx engine 'curl localhost'
